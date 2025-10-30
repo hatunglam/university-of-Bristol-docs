@@ -1,0 +1,369 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "\n",
+    "# EMATM0048: Software Development Programming and Algorithms (SDPA)\n",
+    "# `Tutorial 7A - Numpy`\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Excersises:"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Ex 1: \n",
+    "Write a NumPy program to create a 2d array with 1 on the border and 0 inside."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Original array:\n",
+      "[[1. 1. 1. 1. 1.]\n",
+      " [1. 1. 1. 1. 1.]\n",
+      " [1. 1. 1. 1. 1.]\n",
+      " [1. 1. 1. 1. 1.]\n",
+      " [1. 1. 1. 1. 1.]]\n",
+      "1 on the border and 0 inside in the array\n",
+      "[[1. 1. 1. 1. 1.]\n",
+      " [1. 0. 0. 0. 1.]\n",
+      " [1. 0. 0. 0. 1.]\n",
+      " [1. 0. 0. 0. 1.]\n",
+      " [1. 1. 1. 1. 1.]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "x = np.ones((5,5))\n",
+    "print(\"Original array:\")\n",
+    "print(x)\n",
+    "print(\"1 on the border and 0 inside in the array\")\n",
+    "x[1:-1,1:-1] = 0\n",
+    "print(x)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Ex 2: \n",
+    "Write a NumPy program to convert the values of Fahrenheit degrees into celsius degrees. \n",
+    "\n",
+    "**Expected Output:**\n",
+    "Values in Fahrenheit degrees:\n",
+    "[ 0. 12. 45.21 34. 99.91]\n",
+    "Values in celsius degrees:\n",
+    "[-17.77777778 -11.11111111 7.33888889 1.11111111 37.72777778]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Values in Fahrenheit degrees:\n",
+      "[ 0.   12.   45.21 34.   99.91]\n",
+      "Values in  celsius degrees:\n",
+      "[-17.77777778 -11.11111111   7.33888889   1.11111111  37.72777778]\n"
+     ]
+    }
+   ],
+   "source": [
+    "fvalues = [0, 12, 45.21, 34, 99.91]\n",
+    "F = np.array(fvalues)\n",
+    "print(\"Values in Fahrenheit degrees:\")\n",
+    "print(F)\n",
+    "print(\"Values in  celsius degrees:\") \n",
+    "print(5*F/9 - 5*32/9)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Ex 3:\n",
+    "Write a NumPy program to get the values and indices of the elements that are bigger than 10 in a given array.\n",
+    "\n",
+    "Original array:                                                        \n",
+    "[[ 0 10 20]\n",
+    " [20 30 40]]                                                           \n",
+    "Values bigger than 10 = [20 20 30 40]                                  \n",
+    "Their indices are  (array([0, 1, 1, 1]), array([2, 0, 1, 2]))\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Original array: \n",
+      "[[ 0 10 20]\n",
+      " [20 30 40]]\n",
+      "Values bigger than 10 = [20 20 30 40]\n",
+      "Their indices are  (array([0, 1, 1, 1]), array([2, 0, 1, 2]))\n"
+     ]
+    }
+   ],
+   "source": [
+    "x = np.array([[0, 10, 20], [20, 30, 40]])\n",
+    "print(\"Original array: \")\n",
+    "print(x)\n",
+    "print(\"Values bigger than 10 =\", x[x>10])\n",
+    "print(\"Their indices are \", np.nonzero(x > 10))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Ex 4: \n",
+    "Write a Python NumPy program to compute the weighted average for two arrays. \n",
+    "\n",
+    "The weighted arithmetic mean is similar to an ordinary arithmetic mean (the most common type of average), except that instead of each of the data points contributing equally to the final average, some data points contribute more than others. The notion of weighted mean plays a role in descriptive statistics and also occurs in a more general form in several other areas of mathematics.\n",
+    "\n",
+    "Basic example\n",
+    "Given two school classes, one with 20 students, and one with 30 students, the grades in each class on a test were:\n",
+    "Morning class = 62, 67, 71, 74, 76, 77, 78, 79, 79, 80, 80, 81, 81, 82, 83, 84, 86, 89, 93, 98\n",
+    "Afternoon class = 81, 82, 83, 84, 85, 86, 87, 87, 88, 88, 89, 89, 89, 90, 90, 90, 90, 91, 91, 91, 92, 92, 93, 93, 94, 95, 96, 97, 98, 99\n",
+    "\n",
+    "Weighted average is : 86 "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "First array:\n",
+      "[62 67 71 74 76 77 78 79 79 80 80 81 81 82 83 84 86 89 93 98]\n",
+      "Second array:\n",
+      "[81 82 83 84 85 86 87 87 88 88 89 89 89 90 90 90 90 91 91 91 92 92 93 93\n",
+      " 94 95 96 97 98 99]\n",
+      "Weighted average for both arrays:\n",
+      "86.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "a = np.array([62, 67, 71, 74, 76, 77, 78, 79, 79, 80, 80, 81, 81, 82, 83, 84, 86, 89, 93, 98])\n",
+    "print(\"First array:\")\n",
+    "print(a)\n",
+    "b = np.array([81, 82, 83, 84, 85, 86, 87, 87, 88, 88, 89, 89, 89, 90, 90, 90, 90, 91, 91, 91, 92, 92, 93, 93, 94, 95, 96, 97, 98, 99])\n",
+    "print(\"Second array:\")\n",
+    "print(b)\n",
+    "print(\"Weighted average for both arrays:\")\n",
+    "print((np.average(a)*len(a)+np.average(b)*len(b))/(len(b)+len(a)))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Ex 5: \n",
+    "Replace all odd numbers in the given array with -1. Example input: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\n",
+    "Expected output: [ 0 -1  2 -1  4 -1  6 -1  8 -1]\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[ 0 -1  2 -1  4 -1  6 -1  8 -1]\n"
+     ]
+    }
+   ],
+   "source": [
+    "exercise_1 = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])\n",
+    "exercise_1[exercise_1 % 2 == 1] = -1\n",
+    "\n",
+    "print(exercise_1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Ex #6: \n",
+    "Compute averages using a sliding window over an array?\n",
+    "Example: take the input [5, 2, 4, 6, 3, 1].A slidinhg winodow of size 2 is applied. The current sum of the pair, [5,2] is 7. Continue iterating through the entire array. One must slide the window up by 1 to reach the next iteration. The result is [3.5,3, 5, 4.5, 2]. Try with different window size. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[5, 2, 4, 6, 3, 1]\n",
+      "[3.5 3.  5.  4.5 2. ]\n"
+     ]
+    }
+   ],
+   "source": [
+    "def moving_average(a, n=3) :\n",
+    "    ret = np.cumsum(a, dtype=float)\n",
+    "    ret[n:] = ret[n:] - ret[:-n]\n",
+    "    return ret[n - 1:] / n\n",
+    "Z = [5, 2, 4, 6, 3, 1]\n",
+    "print (Z)\n",
+    "print(moving_average(Z, n=2))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Challenges: "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    " ## Ch #1: \n",
+    " Consider the vector [1, 2, 3, 4, 5], how to build a new vector with 3 consecutive zeros interleaved between each value?\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[1. 0. 0. 0. 2. 0. 0. 0. 3. 0. 0. 0. 4. 0. 0. 0. 5.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "Z = np.array([1,2,3,4,5])\n",
+    "nz = 3\n",
+    "Z0 = np.zeros(len(Z) + (len(Z)-1)*(nz))\n",
+    "Z0[::nz+1] = Z\n",
+    "print(Z0)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Ch #2:\n",
+    "Create a 2D array subclass to create a symmetric matrix from random numbers such that Z[i,j] == Z[j,i]\n",
+    "An example symmetric matrix will look like:\n",
+    "\n",
+    "\n",
+    "[[ 1, 10,  7, 11,  3],\n",
+    "\n",
+    "[10,  0,  8, 15,  2],\n",
+    "\n",
+    "\n",
+    "[ 7,  8,  9,  6,  6],\n",
+    "\n",
+    "[11, 15,  6,  9, 12],\n",
+    "          \n",
+    "          \n",
+    "[ 3,  2,  6, 12,  2]]\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[ 6  5 13 16 12]\n",
+      " [ 5  9 12  9 14]\n",
+      " [13 12  4 42 10]\n",
+      " [16  9 42  9  1]\n",
+      " [12 14 10  1  6]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "class Symetric(np.ndarray):\n",
+    "    def __setitem__(self, index, value):\n",
+    "        i,j = index\n",
+    "        super(Symetric, self).__setitem__((i,j), value)\n",
+    "        super(Symetric, self).__setitem__((j,i), value)\n",
+    "\n",
+    "def symetric(Z):\n",
+    "    return np.asarray(Z + Z.T - np.diag(Z.diagonal())).view(Symetric)\n",
+    "\n",
+    "S = symetric(np.random.randint(0,10,(5,5)))\n",
+    "S[2,3] = 42\n",
+    "print(S)"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "PADH",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.10"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
